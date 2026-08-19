@@ -1,0 +1,1 @@
+DROP FUNCTION IF EXISTS public.admin_update_withdrawal(uuid, text, uuid);

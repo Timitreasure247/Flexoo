@@ -1,0 +1,3 @@
+-- Full schema restoration from uploaded project (concatenated migrations)
+-- See /tmp/mig_final.sql; content embedded below.
+-- BEGIN
