@@ -1,162 +1,370 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Zap, Shield, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
-import flexooLogo from "@/assets/flexoo-logo.png";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.3 },
-  },
-};
+/* ========================================
+   FLEXOOO - CLEAN BANKING UI
+   ======================================== */
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+:root {
+  --background: 150 45% 4%;
+  --foreground: 0 0% 96%;
 
-const particles = [
-  { top: "8%", left: "15%", delay: 0 },
-  { top: "12%", right: "10%", delay: 1.5 },
-  { top: "45%", right: "5%", delay: 3 },
-  { top: "70%", left: "25%", delay: 2 },
-  { top: "60%", right: "18%", delay: 4 },
-  { top: "30%", left: "8%", delay: 1 },
-];
+  --card: 150 35% 7%;
+  --card-foreground: 0 0% 96%;
 
-const Index = () => {
-  return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background">
-      {/* Background network/grid lines */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="hsl(150, 20%, 40%)" strokeWidth="0.5" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
+  --popover: 150 35% 7%;
+  --popover-foreground: 0 0% 96%;
 
-        {/* Curved network lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.06]" viewBox="0 0 1440 900" preserveAspectRatio="none">
-          <path d="M0 450 Q 360 300, 720 450 T 1440 450" fill="none" stroke="hsl(150, 30%, 30%)" strokeWidth="1" />
-          <path d="M0 350 Q 400 500, 800 350 T 1440 380" fill="none" stroke="hsl(150, 30%, 25%)" strokeWidth="0.8" />
-          <ellipse cx="720" cy="420" rx="350" ry="200" fill="none" stroke="hsl(150, 25%, 20%)" strokeWidth="0.6" opacity="0.5" />
-          <ellipse cx="720" cy="420" rx="500" ry="280" fill="none" stroke="hsl(150, 25%, 18%)" strokeWidth="0.4" opacity="0.3" />
-        </svg>
-      </div>
+  --primary: 145 70% 45%;
+  --primary-foreground: 150 45% 4%;
 
-      {/* Floating green particles */}
-      {particles.map((p, i) => (
-        <div
-          key={i}
-          className="particle absolute w-1.5 h-1.5 rounded-full bg-primary/60"
-          style={{
-            top: p.top,
-            left: p.left,
-            right: p.right,
-            animationDelay: `${p.delay}s`,
-          } as React.CSSProperties}
-        />
-      ))}
+  --secondary: 150 30% 10%;
+  --secondary-foreground: 0 0% 96%;
 
-      {/* Central glow */}
-      <div className="bg-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[120px]" />
+  --muted: 150 20% 15%;
+  --muted-foreground: 150 10% 60%;
 
-      {/* Main content */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative z-10 flex flex-col items-center text-center px-4 max-w-2xl mx-auto"
-      >
-        {/* Logo */}
-        <motion.div variants={item} className="mb-6">
-          <img src={flexooLogo} alt="Flexoo Logo" className="w-16 h-16 object-contain" />
-        </motion.div>
+  --accent: 150 30% 12%;
+  --accent-foreground: 0 0% 96%;
 
-        {/* Title */}
-        <motion.h1
-          variants={item}
-          className="text-5xl md:text-6xl font-bold tracking-tight"
-          style={{
-            background: "linear-gradient(135deg, hsl(140, 70%, 50%), hsl(85, 80%, 55%))",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textWrap: "balance",
-          }}
-        >
-          Flexoo
-        </motion.h1>
+  --border: 150 25% 15%;
+  --input: 150 25% 12%;
 
-        {/* Subtitle */}
-        <motion.p variants={item} className="mt-4 text-muted-foreground text-lg leading-relaxed max-w-md">
-          The future of banking. Seamless, secure, and built for you.
-        </motion.p>
+  --ring: 145 70% 45%;
 
-        {/* Feature badges */}
-        <motion.div variants={item} className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <FeatureBadge icon={<Zap className="w-4 h-4 text-primary" />} label="Instant Transfers" />
-          <FeatureBadge icon={<Shield className="w-4 h-4 text-primary" />} label="Bank-Grade Security" />
-        </motion.div>
-        <motion.div variants={item} className="mt-3 flex justify-center">
-          <FeatureBadge icon={<Sparkles className="w-4 h-4 text-primary" />} label="Smart Earnings" />
-        </motion.div>
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 0 0% 96%;
 
-        {/* CTA Card */}
-        <motion.div
-          variants={item}
-          className="mt-10 w-full max-w-sm rounded-2xl p-6"
-          style={{
-            background: "var(--glass-bg)",
-            border: "1px solid var(--glass-border)",
-            backdropFilter: "blur(20px)",
-            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3), var(--glow-green)",
-          }}
-        >
-          <Link
-            to="/signup"
-            className="w-full h-14 rounded-xl font-semibold text-lg flex items-center justify-center gap-2 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg cursor-pointer no-underline"
-            style={{
-              background: "var(--gradient-cta)",
-              color: "hsl(150, 30%, 6%)",
-            }}
-          >
-            Get Started
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+  --radius: 1rem;
 
-          <p className="mt-4 text-sm text-muted-foreground">
-            Already have an account?{" "}
-            <Link to="/login" className="text-primary hover:underline font-medium">
-              Sign in
-            </Link>
-          </p>
-        </motion.div>
-
-        {/* Trust bar */}
-        <motion.div variants={item} className="mt-8 flex items-center gap-2 text-xs text-muted-foreground">
-          <span className="w-2 h-2 rounded-full bg-primary/70" />
-          Secure • Fast • Trusted
-        </motion.div>
-      </motion.div>
-    </div>
+  /* Flexooo custom colors */
+  --gradient-cta: linear-gradient(
+    135deg,
+    hsl(145 70% 45%),
+    hsl(60 90% 50%)
   );
-};
 
-const FeatureBadge = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <div
-    className="flex items-center gap-2 px-4 py-2 rounded-full text-sm text-foreground/80"
-    style={{
-      background: "hsla(150, 20%, 12%, 0.5)",
-      border: "1px solid hsla(150, 15%, 22%, 0.4)",
-    }}
-  >
-    {icon}
-    {label}
-  </div>
-);
+  --glass-bg: rgba(8, 35, 24, 0.78);
+  --glass-border: rgba(50, 180, 100, 0.12);
 
-export default Index;
+  --glow-green: 0 8px 32px rgba(32, 215, 106, 0.25);
+}
+
+/* ========================================
+   RESET
+   ======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: hsl(var(--background));
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(20, 180, 90, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(180, 210, 20, 0.05),
+      transparent 30%
+    ),
+    hsl(var(--background));
+
+  color: hsl(var(--foreground));
+  min-height: 100vh;
+}
+
+/* ========================================
+   FORM ELEMENTS
+   ======================================== */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+input,
+textarea,
+select {
+  color: hsl(var(--foreground));
+}
+
+/* ========================================
+   FLEXOOO SIGNUP INPUTS
+   ======================================== */
+
+.signup-input {
+  width: 100%;
+  height: 52px;
+
+  padding: 0 16px 0 48px;
+
+  border-radius: 14px;
+
+  border: 1px solid hsl(var(--border));
+
+  background: hsl(var(--input));
+
+  color: hsl(var(--foreground));
+
+  outline: none;
+
+  font-size: 15px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.signup-input::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.8;
+}
+
+.signup-input:hover {
+  border-color: hsl(var(--primary) / 0.35);
+}
+
+.signup-input:focus {
+  border-color: hsl(var(--primary));
+
+  background: hsl(var(--input));
+
+  box-shadow:
+    0 0 0 3px hsl(var(--primary) / 0.1),
+    0 0 20px hsl(var(--primary) / 0.08);
+}
+
+.signup-input:disabled {
+  opacity: 0.6;
+}
+
+/* ========================================
+   INPUT AUTOFILL
+   ======================================== */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: hsl(var(--foreground));
+
+  -webkit-box-shadow:
+    0 0 0 1000px hsl(var(--input)) inset;
+
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ========================================
+   CLEAN FORM CARD
+   ======================================== */
+
+.signup-card {
+  width: 100%;
+
+  background: var(--glass-bg);
+
+  border: 1px solid var(--glass-border);
+
+  border-radius: 24px;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(20, 180, 90, 0.04);
+}
+
+/* ========================================
+   CTA BUTTON
+   ======================================== */
+
+.signup-button {
+  width: 100%;
+  height: 52px;
+
+  border: 0;
+  border-radius: 14px;
+
+  background: var(--gradient-cta);
+
+  color: hsl(150 30% 6%);
+
+  font-weight: 700;
+  font-size: 16px;
+
+  box-shadow: var(--glow-green);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.signup-button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 35px rgba(32, 215, 106, 0.32);
+}
+
+.signup-button:active {
+  transform: translateY(0);
+}
+
+.signup-button:disabled {
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* ========================================
+   IMAGES
+   ======================================== */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .signup-input {
+    height: 52px;
+    font-size: 15px;
+  }
+
+  .signup-card {
+    border-radius: 22px;
+  }
+
+  .signup-button {
+    height: 52px;
+    font-size: 16px;
+  }
+}
+
+/* ========================================
+   SUBTLE FLEXOOO BACKGROUND
+   ======================================== */
+
+.flexooo-background {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: hsl(var(--background));
+}
+
+.flexooo-background::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(60, 180, 100, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(60, 180, 100, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 60px 60px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 90%
+  );
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* ========================================
+   SELECTION
+   ======================================== */
+
+::selection {
+  background: hsl(var(--primary) / 0.3);
+  color: hsl(var(--foreground));
+}
