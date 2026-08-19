@@ -1,6 +1,35 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background: 150 35% 4%;
+  --foreground: 0 0% 96%;
+
+  --card: 150 30% 7%;
+  --card-foreground: 0 0% 96%;
+
+  --primary: 145 75% 45%;
+  --primary-foreground: 150 35% 4%;
+
+  --secondary: 70 95% 50%;
+  --secondary-foreground: 150 35% 4%;
+
+  --muted: 150 15% 12%;
+  --muted-foreground: 150 10% 65%;
+
+  --border: 150 20% 15%;
+  --input: 150 20% 12%;
+
+  --destructive: 0 70% 50%;
+
+  --gradient-cta: linear-gradient(
+    135deg,
+    #20d76a 0%,
+    #b7ed20 100%
+  );
+}
 
 * {
   box-sizing: border-box;
@@ -17,8 +46,8 @@ body,
 
 body {
   font-family: Arial, sans-serif;
-  background: #ffffff;
-  color: #111111;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
 button,
@@ -28,7 +57,95 @@ select {
   font: inherit;
 }
 
+button {
+  cursor: pointer;
+}
+
 img {
   max-width: 100%;
   display: block;
+}
+
+/* Flexooo background */
+
+.bg-background {
+  background: hsl(var(--background));
+}
+
+.text-foreground {
+  color: hsl(var(--foreground));
+}
+
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+
+.text-primary {
+  color: hsl(var(--primary));
+}
+
+.bg-primary {
+  background: hsl(var(--primary));
+}
+
+.border-border {
+  border-color: hsl(var(--border));
+}
+
+/* Glowing background */
+
+.bg-glow {
+  background: hsl(145 75% 45%);
+  opacity: 0.08;
+  filter: blur(120px);
+}
+
+/* Signup / login inputs */
+
+.signup-input {
+  width: 100%;
+  height: 58px;
+  padding: 0 18px 0 48px;
+  border-radius: 18px;
+  border: 1px solid hsl(150 20% 16%);
+  background: hsl(150 25% 8%);
+  color: hsl(var(--foreground));
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.signup-input::placeholder {
+  color: hsl(150 10% 48%);
+}
+
+.signup-input:focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(145 75% 45% / 0.12);
+}
+
+/* Main CTA */
+
+button[type="submit"] {
+  background: var(--gradient-cta);
+  color: #06130b;
+  box-shadow: 0 8px 30px hsl(145 75% 45% / 0.25);
+}
+
+button[type="submit"]:hover {
+  box-shadow: 0 10px 35px hsl(145 75% 45% / 0.4);
+}
+
+/* Flexooo cards */
+
+.rounded-xl,
+.rounded-2xl {
+  border-color: hsl(150 20% 14%);
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+  }
 }
