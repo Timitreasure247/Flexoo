@@ -177,14 +177,15 @@ const Login = () => {
 
             {/* Submit */}
             <button
-              type="submit"
-              disabled={loading}
-              className="w-full h-12 rounded-xl font-semibold text-base flex items-center justify-center transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{
-                background: "var(--gradient-cta)",
-                color: "hsl(150, 30%, 6%)",
-              }}
-            >
+  type="submit"
+  disabled={loading}
+  className="w-full h-12 rounded-xl font-semibold text-base flex items-center justify-center transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+  style={{
+    background: "linear-gradient(135deg, #20d76a, #d7f000)",
+    color: "#06150f",
+    boxShadow: "0 8px 24px rgba(32, 215, 106, 0.25)",
+  }}
+>
               {loading ? "Signing in..." : "Sign in"}
             </button>
           </form>
